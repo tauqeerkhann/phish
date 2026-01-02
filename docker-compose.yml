@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: telegram-bot
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+      - ./users.json:/var/www/html/users.json
+      - ./error.log:/var/www/html/error.log
+    environment:
+      - BOT_TOKEN=${BOT_TOKEN}
+      - WEBHOOK_URL=${WEBHOOK_URL}
+    restart: unless-stopped
